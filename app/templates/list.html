@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <h3>Links</h3>
+    <ul class="links">
+    {%  for link in links| dictsort %}
+        <li>
+            <a href="http://{{ link[0] }}">{{ link[0] }}</a>
+            {% if link[1]>1 %}
+            <span class="num">({{ link[1] }})</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
