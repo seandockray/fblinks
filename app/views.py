@@ -12,6 +12,9 @@ from feed_maker import get_user_feed, get_user_links
 FB_APP_ID = app.config['FB_APP_ID']
 FB_APP_NAME = app.config['FB_APP_NAME']
 FB_APP_SECRET = app.config['FB_APP_SECRET']
+# Cache lifespans
+CACHE_LIFE_LINKS = app.config['CACHE_LIFE_LINKS']
+CACHE_LIFE_RSS = app.config['CACHE_LIFE_RSS']
 
 # LKG directory
 LKG_DIR = os.path.join(app.config['BASE_DIRECTORY'], '_lkg')
@@ -45,7 +48,7 @@ def get_lkg(user_id, prefix='links-'):
 
 # RSS Feed
 @app.route('/fb/<user_id>.rss', methods=['GET'])
-@app.cache.cached(timeout=app.config['CACHE_LIFE_RSS'])
+@app.cache.cached(timeout=CACHE_LIFE_RSS)
 def rss_feed(user_id):
     """ An RSS feed """
     access_token = get_access_token(user_id)
@@ -65,7 +68,7 @@ def rss_feed(user_id):
 
 # Links list
 @app.route('/fb/<user_id>', methods=['GET'])
-@app.cache.cached(timeout=app.config['CACHE_LIFE_LINKS'])
+@app.cache.cached(timeout=CACHE_LIFE_LINKS)
 def links_list(user_id):
     """ An alphabetical list of websites """
     access_token = get_access_token(user_id)
