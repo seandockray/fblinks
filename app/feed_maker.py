@@ -4,6 +4,7 @@
 """
 Builds feeds
 """
+import re
 from dateutil.parser import parse
 from urlparse import urlparse
 import facebook
@@ -41,6 +42,7 @@ def add_to_feed(post, feed_entry, id="feed_id"):
     if 'message' in post:
         summary = '%s<p>%s</p>' % (summary, post['message'])
     if summary:
+        summary = re.sub(u'[^\u0020-\uD7FF\u0009\u000A\u000D\uE000-\uFFFD\u10000-\u10FFFF]+', '', summary)
         feed_entry.summary(summary=summary)
 
 def construct_feed(links, id=''):
