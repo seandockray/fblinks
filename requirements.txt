@@ -1,12 +1,16 @@
 Flask==0.10.1
 Flask-SQLAlchemy==1.0
+Flask-Cache==0.13.1
 Jinja2==2.7.2
 MarkupSafe==0.19
 SQLAlchemy==0.9.4
 Werkzeug==0.9.4
 argparse==1.2.1
+python-dateutil==2.6.0
 distribute==0.6.24
+feedgen==0.4.0
 git+https://github.com/mobolic/facebook-sdk.git#egg=facebook-sdk
 itsdangerous==0.24
 requests==2.2.1
+tld==0.7.6
 wsgiref==0.1.2

@@ -6,5 +6,6 @@ app = Flask(__name__)
 app.config.from_object('config')
 app.cache = Cache(app)
 db = SQLAlchemy(app)
+db.create_all()
 
 from app import views, models
