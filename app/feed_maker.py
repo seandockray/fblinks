@@ -52,7 +52,7 @@ def construct_feed(links, id=''):
     fg.title('links')
     fg.subtitle('links from your friends without the ads, memoir, or auto-playing videos')
     fg.link( href='http://links.metadada.xyz/', rel='self' )
-    for l in links.sort(key=lambda item:item['created_time'], reverse=True):
+    for l in sorted(links, key=lambda item:item['created_time'], reverse=True):
         add_to_feed(l, fg.add_entry(), id=id)
     return fg
 
