@@ -30,7 +30,8 @@ def add_to_feed(post, feed_entry, id="feed_id"):
     feed_entry.id('http://links.metadada.xyz/fb/%s/%s' % (id,post['id']))
     feed_entry.pubdate(pubDate=c_time)
     feed_entry.updated(updated=u_time)
-    feed_entry.link(link={'href':post['link'], 'title': post['name']})
+    title = post['name'] if 'name' in post else 'Untitled'
+    feed_entry.link(link={'href':post['link'], 'title': title})
     feed_entry.title(title=post['name'])
     summary = ''
     if 'picture' in post and post['picture'] is not None:
