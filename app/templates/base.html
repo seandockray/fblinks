@@ -25,6 +25,16 @@
 </head>
 <body>
     <script type="text/javascript">
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+              if (response.status === 'connected') {
+                    window.location = window.location;
+                } else if (response.status === 'not_authorized') {
+                  document.getElementById('status').innerHTML = 'Log into this app to generate your links page.';
+                }
+            });
+        }
+
         window.fbAsyncInit = function() {
             FB.init({
                 appId      : '{{ app_id }}',
@@ -33,16 +43,12 @@
                 xfbml      : true,
                 version    : 'v2.8'
             });
-
-            FB.Event.subscribe('auth.login', function(response) {
-                window.location = window.location;
-            });
         };
 
         // Load the SDK Asynchronously
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
+            if (d.getElementById(id)) { return; }
             js = d.createElement(s); js.id = id;
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
