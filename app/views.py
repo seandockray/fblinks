@@ -82,6 +82,11 @@ def links_list(user_id):
     # Otherwise, a user is not logged in.
     return render_template('login.html', app_id=FB_APP_ID, name=FB_APP_NAME)
 
+
+@app.route('/privacy-policy.html')
+def privacy():
+    return render_template('privacy.html')
+
 #
 # Boilerplate FB App stuff
 #
