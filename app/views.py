@@ -52,12 +52,12 @@ def get_lkg(user_id, prefix='links-'):
 def rss_feed(user_id):
     """ An RSS feed """
     access_token = get_access_token(user_id)
-    if access_token:
+    try:
         graph = GraphAPI(access_token)
         rss = get_user_feed(graph, user_id).rss_str()
         set_lkg(user_id, rss, prefix='rss-')
         return Response(rss, mimetype='text/xml')
-    else:
+    except:
         try:
             return Response(get_lkg(user_id, prefix='rss-'), mimetype='text/xml')
         except:
@@ -72,12 +72,12 @@ def rss_feed(user_id):
 def links_list(user_id):
     """ An alphabetical list of websites """
     access_token = get_access_token(user_id)
-    if access_token:
+    try:
         graph = GraphAPI(access_token)
         links = get_user_links(graph, user_id, num_pages=5)
         set_lkg(user_id, json.dumps(links), prefix='links-')
         return render_template('list.html', links=links, app_id=FB_APP_ID, name=FB_APP_NAME)
-    else:
+    except:
         try:
             return render_template('list.html', links=json.loads(get_lkg(user_id, prefix='links-')), app_id=FB_APP_ID, name=FB_APP_NAME)
         except:
